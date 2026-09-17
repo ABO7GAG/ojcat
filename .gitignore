@@ -1,0 +1,5 @@
+ojcat 
+the_vision.txt
+*.o
+.tmp/
+test.txt
