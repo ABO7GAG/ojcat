@@ -3,3 +3,4 @@ the_vision.txt
 *.o
 .tmp/
 test.txt
+compile_errors.txt
