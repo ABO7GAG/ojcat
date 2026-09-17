@@ -86,7 +86,6 @@ int main(int argc, char *argv[])
           exit(EXIT_FAILURE);
         } else {
           if (memcmp(buffer, ELF_MAGIC, 4) == 0) {
-            size_t result = fread(phdr, sizeof(unsigned char), 56, fp);
             printf("your ELF file is [%s]\n", argv[1]);
             printf("Class: %02X\n", buffer[4]);
             printf("Data: %02X\n", buffer[5]);
@@ -119,11 +118,13 @@ int main(int argc, char *argv[])
             printf("Section Header Number: %04" PRIX16 "\n", e_shnum);
             uint16_t e_shstrndx = read_u16(&buffer[62]);
             printf("Section Header String Table Index: %04" PRIX16 "\n", e_shstrndx);
+
             if (fseek(fp, e_phoff, SEEK_SET) != 0) {
               perror("fseek");
               exit(EXIT_FAILURE);
             }
 
+            size_t result = fread(phdr, sizeof(unsigned char), 56, fp);
             fclose(fp);
           } else {
             fprintf(stderr, "sorry but probably this is not an ELF file...\n");
