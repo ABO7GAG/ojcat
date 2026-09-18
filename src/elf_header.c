@@ -44,6 +44,7 @@ int print_elf_header(const char *filename)
   unsigned char buffer[64];
   FILE *fp;
 
+  // printf("DEBUG: trying to open [%s]\n", filename);
   fp = fopen(filename, "rb");
   if (fp == NULL) {
     fprintf(stderr, "sorry your file not opened cuz :%s\n", strerror(errno));

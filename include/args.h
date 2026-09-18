@@ -10,4 +10,6 @@ typedef enum {
   CMD_ERR
 } CmdTyps;
 
+CmdTyps parse_command(int argc, char *argv[]);
+
 #endif // !ARGS_H
