@@ -37,7 +37,7 @@ const char *elf_type_name(uint16_t type)
     }
 }
 
-int print_elf_header(const char *filename)
+int print_elf_header(const char *filename, uint64_t *phoff_out, uint16_t *phnum_out)
 {
   // unsigned char phdr[56];
   unsigned char ELF_MAGIC[] = {0x7F, 0x45, 0x4C, 0x46};
@@ -118,6 +118,9 @@ int print_elf_header(const char *filename)
 
   // fread(phdr, sizeof(unsigned char), 56, fp);
   fclose(fp);
+
+  *phoff_out = e_phoff;
+  *phnum_out = e_phnum;
 
   return 0;
 }

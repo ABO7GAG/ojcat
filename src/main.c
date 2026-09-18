@@ -17,6 +17,16 @@ int main(int argc, char *argv[])
     CmdTyps command = parse_command(argc, argv);
     if (command == CMD_HDR) {
       print_elf_header(argv[2]);
+    } else if (command == CMD_STS) {
+      // func to section command
+    } else if (command == CMD_HEX) {
+      // func to hex command
+    } else if (command == CMD_BIN) {
+      // func to binary command
+    } else if (command == CMD_ASC) {
+      // func to ascii command
+    } else {
+      exit(EXIT_FAILURE);
     }
   } else if (status < 0) {
     fprintf(stderr, "too many arguments bro...\n", strerror(errno));
