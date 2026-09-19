@@ -5,6 +5,9 @@
 #include "../include/args.h"
 #include "../include/elf_sections.h"
 #include "../include/hexdump.h"
+#include "../include/bindump.h"
+#include "../include/elf_types.h"
+#include "../include/ascii_dump.h"
 #include <errno.h>
 
 int com(int argc, char *argv[]);
@@ -30,9 +33,9 @@ int main(int argc, char *argv[])
     } else if (command == CMD_HEX) {
       print_hex(argv[2]);
     } else if (command == CMD_BIN) {
-      // func to binary command
+      print_binary(argv[2]);
     } else if (command == CMD_ASC) {
-      // func to ascii command
+      print_ascii(argv[2]);
     } else {
       exit(EXIT_FAILURE);
     }

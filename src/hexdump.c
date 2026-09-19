@@ -15,6 +15,7 @@ int print_hex(const char *filename)
   while (fread(&byte, sizeof(unsigned char), 1, fp) == 1) {
     printf("0x%02X ", byte);
   }
+  printf("\n");
   fclose(fp);
   return 0;
 }
