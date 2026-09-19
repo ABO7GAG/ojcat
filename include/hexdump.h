@@ -3,5 +3,5 @@
 
 int print_hex(const char *filename);
 
-#endif // !HEXDUMP_H
+#endif 
 

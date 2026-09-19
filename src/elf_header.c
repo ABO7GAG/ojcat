@@ -39,12 +39,10 @@ const char *elf_type_name(uint16_t type)
 
 int print_elf_header(const char *filename, uint64_t *phoff_out, uint16_t *phnum_out)
 {
-  // unsigned char phdr[56];
   unsigned char ELF_MAGIC[] = {0x7F, 0x45, 0x4C, 0x46};
   unsigned char buffer[64];
   FILE *fp;
 
-  // printf("DEBUG: trying to open [%s]\n", filename);
   fp = fopen(filename, "rb");
   if (fp == NULL) {
     fprintf(stderr, "sorry your file not opened cuz :%s\n", strerror(errno));
@@ -116,7 +114,6 @@ int print_elf_header(const char *filename, uint64_t *phoff_out, uint16_t *phnum_
     return 1;
   }
 
-  // fread(phdr, sizeof(unsigned char), 56, fp);
   fclose(fp);
 
   *phoff_out = e_phoff;

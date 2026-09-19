@@ -12,15 +12,12 @@ int print_ascii(const char *filename){
     fprintf(stderr, "sorry the file not open cuz: %s\n", strerror(errno));
     return 1;
   }
-  // size_t result = fread(&byte, sizeof(unsigned char), 1, fp);
   while (fread(&byte, sizeof(unsigned char), 1, fp) == 1) {
-  // for (i = 0; i < result; i ++) {
     if (byte >= 32 && byte <= 126) {
       printf("%c", byte);
     } else {
       printf(".");
     }
-  // }
   }
   printf("\n");
   fclose(fp);

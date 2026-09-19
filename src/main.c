@@ -19,7 +19,6 @@ int main(int argc, char *argv[])
     if (command == CMD_HDR) {
       uint64_t phoff;
       uint16_t phnum;
-      // get_phdr_info(argv[2], &phoff, &phnum);
       print_elf_header(argv[2], &phoff, &phnum);
     } else if (command == CMD_STS) {
       uint64_t phoff;
@@ -51,7 +50,6 @@ int main(int argc, char *argv[])
 }
 
 int com(int argc, char *argv[]){
-  // CmdTyps command = parse_command(argc, argv);
   if (argc == 3) {
     printf("you will see your file with this command %s\n", argv[1]);
     printf("your program is [%s] to read\n", argv[2]);
@@ -60,19 +58,12 @@ int com(int argc, char *argv[]){
     return 0;
   } else if (argc == 2 && strcmp(argv[1], "--version") == 0) {
     return 0;
-  } /* else if (argc == 2) {
-    printf("sorry... you need to run another argument like this \"ojcat -h <file>\"\n");
-    return 1;
-  } */ else if (argc == 1) {
+  } else if (argc == 1) {
     printf("hi... i see you use my tool... type this helpful commands --help --version\n");
     return 2;
   } else if (argc > 3) {
     printf("bro just 3 words to type...\n");
     return 4;
   } 
-  // else {
-  //   printf("write \"ojcat command from those --help --version -a -b -s -h -x please..\"\n");
-  //   return 3;
-  // }
   return 0;
 }

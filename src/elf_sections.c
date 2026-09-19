@@ -36,7 +36,6 @@ int print_section(const char *filename, uint64_t e_phoff, uint16_t e_phnum)
   if (fp == NULL) {
     fprintf(stderr, "sorry the file not open cuz: %s\n", strerror(errno));
     return 1;
-    // exit(EXIT_FAILURE);
   } if (fseek(fp, e_phoff, SEEK_SET) != 0){
     perror("fseek");
     fclose(fp);
@@ -54,32 +53,24 @@ int print_section(const char *filename, uint64_t e_phoff, uint16_t e_phnum)
    printf("Type: %08X (%s)\n", p_type, program_type_name(p_type));
 
    uint32_t p_flags = read_u32(&phdr_buffer[4]);
-   // printf("Program Header #%d:\n", i);
    printf("Flags: %08X\n", p_flags);
 
    uint64_t p_offset = read_u64(&phdr_buffer[8]);
-   // printf("Program Header #%d:\n", i);
    printf("Offest: %016" PRIX64 "\n", p_offset);
 
    uint64_t p_vaddr = read_u64(&phdr_buffer[16]);
-   // printf("%s\n");
-   // printf("Program Header #%d:\n", i);
    printf("Vaddr: %016" PRIX64 "\n", p_vaddr);
 
    uint64_t p_paddr = read_u64(&phdr_buffer[24]);
-   // printf("Program Header #%d:\n", i);
    printf("Paddr: %016" PRIX64 "\n", p_paddr);
 
    uint64_t p_filesz = read_u64(&phdr_buffer[32]);
-   // printf("Program Header #%d:\n", i);
    printf("Filesz: %016" PRIX64 "\n", p_filesz);
 
    uint64_t p_memsz = read_u64(&phdr_buffer[40]);
-   // printf("Program Header #%d:\n", i);
    printf("Memsz: %016" PRIX64 "\n", p_memsz);
 
    uint64_t p_align = read_u64(&phdr_buffer[48]);
-   // printf("Program Header #%d:\n", i);
    printf("Align: %016" PRIX64 "\n", p_align);
   }
   return 0;
