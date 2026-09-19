@@ -3,6 +3,7 @@
 #include <string.h>
 #include "../include/elf_header.h"
 #include "../include/args.h"
+#include "../include/elf_sections.h"
 #include <errno.h>
 
 int com(int argc, char *argv[]);
@@ -16,9 +17,15 @@ int main(int argc, char *argv[])
   if (status == 0) {
     CmdTyps command = parse_command(argc, argv);
     if (command == CMD_HDR) {
-      print_elf_header(argv[2]);
+      uint64_t phoff;
+      uint16_t phnum;
+      // get_phdr_info(argv[2], &phoff, &phnum);
+      print_elf_header(argv[2], &phoff, &phnum);
     } else if (command == CMD_STS) {
-      // func to section command
+      uint64_t phoff;
+      uint16_t phnum;
+      get_phdr_info(argv[2], &phoff, &phnum);
+      print_section(argv[2], phoff, phnum);
     } else if (command == CMD_HEX) {
       // func to hex command
     } else if (command == CMD_BIN) {

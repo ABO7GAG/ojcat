@@ -124,3 +124,28 @@ int print_elf_header(const char *filename, uint64_t *phoff_out, uint16_t *phnum_
 
   return 0;
 }
+int get_phdr_info(const char *filename, uint64_t *phoff_out, uint16_t *phnum_out)
+{
+  unsigned char buffer[64];
+  FILE *fp;
+
+  fp = fopen(filename, "rb");
+  if (fp == NULL) {
+    fprintf(stderr, "sorry... can't open the file...: %s\n", strerror(errno));
+    return 1;
+  }
+  size_t result = fread(buffer, sizeof(unsigned char), 64, fp);
+  if (result != 64) {
+    fprintf(stderr, "file not readed properly: %s\n", strerror(errno));
+    fclose(fp);
+    return 1;
+  }
+  uint64_t e_phoff = read_u64(&buffer[32]);
+  uint16_t e_phnum = read_u16(&buffer[56]);
+
+  *phoff_out = e_phoff;
+  *phnum_out = e_phnum;
+
+  fclose(fp);
+  return 0;
+}
