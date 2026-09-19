@@ -13,8 +13,13 @@ CmdTyps parse_command(int argc, char *argv[]){
     return CMD_BIN;
   } else if (strcmp(argv[1], "-a") == 0) {
     return CMD_ASC;
-  } else {
-    fprintf(stderr, "UNKNOWN ERROR\n");
+  } else if (strcmp(argv[1], "--help") == 0) {
+    return CMD_HLP;
+  } else if (strcmp(argv[1], "--version") == 0) {
+    return CMD_VRN;
+  }
+  else {
+    fprintf(stderr, "UNKNOWN ERROR\n available commands is -a -b -x -h -s --help --version\n just it\n");
     return CMD_ERR;
     }
 }

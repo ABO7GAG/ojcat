@@ -6,7 +6,9 @@ typedef enum {
   CMD_STS,      
   CMD_HEX,      
   CMD_BIN,      
-  CMD_ASC,      
+  CMD_ASC,    
+  CMD_HLP,
+  CMD_VRN,
   CMD_ERR
 } CmdTyps;
 

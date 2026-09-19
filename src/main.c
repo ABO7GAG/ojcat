@@ -9,15 +9,11 @@
 #include "../include/elf_types.h"
 #include "../include/ascii_dump.h"
 #include <errno.h>
-
 int com(int argc, char *argv[]);
 
 int main(int argc, char *argv[])
 {
   int status = com(argc, argv);
-
-  
-
   if (status == 0) {
     CmdTyps command = parse_command(argc, argv);
     if (command == CMD_HDR) {
@@ -36,9 +32,15 @@ int main(int argc, char *argv[])
       print_binary(argv[2]);
     } else if (command == CMD_ASC) {
       print_ascii(argv[2]);
-    } else {
+    } else if (command == CMD_HLP) {
+      printf("Usage: ojcat <command> <file>\n\nCommands:\n-h              Print the ELF header information\n-s              Print program headers (sections)\n-x              Print the file as hex\n-b              Print the file as binary\n-a              Print the file as ASCII (with hex-like layout)\n\nExample:\nojcat -h myfile.elf\n");
+    } else if (command == CMD_VRN) {
+      printf("ojcat - a lightweight ELF binary inspection tool\nVersion 0.8\n\nPart of the Oj project — building low-level systems, security tools,\nand developer utilities from scratch, one piece at a time.\n\nProject: Oj — https:\/\/github.com/AboHgegA\n        AND - https:\/\/codeberg.org/ABO-7GAG/\n\n");
+    }
+    else {
       exit(EXIT_FAILURE);
     }
+
   } else if (status < 0) {
     fprintf(stderr, "too many arguments bro...\n", strerror(errno));
   } else {
@@ -49,23 +51,28 @@ int main(int argc, char *argv[])
 }
 
 int com(int argc, char *argv[]){
+  // CmdTyps command = parse_command(argc, argv);
   if (argc == 3) {
     printf("you will see your file with this command %s\n", argv[1]);
     printf("your program is [%s] to read\n", argv[2]);
     return 0;
-  } else if (argc == 2) {
+  } else if (argc == 2 && strcmp(argv[1], "--help") == 0) {
+    return 0;
+  } else if (argc == 2 && strcmp(argv[1], "--version") == 0) {
+    return 0;
+  } /* else if (argc == 2) {
     printf("sorry... you need to run another argument like this \"ojcat -h <file>\"\n");
     return 1;
-  } else if (argc == 1) {
-    printf("you shuold run this \"-h\"command to run your code successfully...\n");
+  } */ else if (argc == 1) {
+    printf("hi... i see you use my tool... type this helpful commands --help --version\n");
     return 2;
   } else if (argc > 3) {
     printf("bro just 3 words to type...\n");
     return 4;
   } 
-  else {
-    printf("write \"ojcat <file> please..\"\n");
-    return 3;
-  }
+  // else {
+  //   printf("write \"ojcat command from those --help --version -a -b -s -h -x please..\"\n");
+  //   return 3;
+  // }
   return 0;
 }
