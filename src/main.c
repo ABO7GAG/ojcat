@@ -4,6 +4,7 @@
 #include "../include/elf_header.h"
 #include "../include/args.h"
 #include "../include/elf_sections.h"
+#include "../include/hexdump.h"
 #include <errno.h>
 
 int com(int argc, char *argv[]);
@@ -27,7 +28,7 @@ int main(int argc, char *argv[])
       get_phdr_info(argv[2], &phoff, &phnum);
       print_section(argv[2], phoff, phnum);
     } else if (command == CMD_HEX) {
-      // func to hex command
+      print_hex(argv[2]);
     } else if (command == CMD_BIN) {
       // func to binary command
     } else if (command == CMD_ASC) {
